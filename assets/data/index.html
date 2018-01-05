@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="data blog">
+    <meta name="author" content="michael burt">
+    <link rel="shortcut icon" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <title>michael's data blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="http://mpburt.com/css/style-blog.css" rel="stylesheet">
+
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="http://mpburt.com/">Home</a>
+          <a class="blog-nav-item active" href="http://mpburt.com/data/">Data Stuff</a>
+          <a class="blog-nav-item" href="http://mpburt.com/other/">Other Stuff</a>
+          <a class="blog-nav-item" href="http://mpburt.com/about/">About</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="blog-header">
+        <h3 class="blog-title">michael's data blog</h3>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+
+          <div class="blog-post">
+            <a name="20140627"><h3>Electricity Price Web App - Part 3</h3></a>
+            <p class="blog-post-meta">June 27, 2014 by <a href="http://mpburt.com/">michael</a></p>
+
+            <p>This is a series of posts describing how to build a web app that displays the price of electricity in <a href="http://www.pjm.com/">PJM Interconnection</a>. I am going to show you how to build this applicaiton on a <a href="http://www.raspberrypi.org/help/what-is-a-raspberry-pi/">Raspberry Pi</a>, but it will work on many different unix systems with some minor changes.</p>
+            <p>This series of posts is broken up into three parts:
+            </p><ul>
+              <li><a href="http://mpburt.com/blog/data/#20140424">Part 1 - The Database - stand up a database to store our data</a></li>
+              <li><a href="http://mpburt.com/blog/data/#20140529">Part 2 - The Parser - set up a web scraper to harvest the price data</a></li>
+              <li><a href="http://mpburt.com/blog/data/#20140627">Part 3 - Visualization - visualize the data using R and Shiny</a></li>
+            </ul>
+	          <p>All of these posts assumes that you have rudimentary knowledge of a few things:</p>
+            <ul>
+              <li>Unix operating system</li>
+              <li>python</li>
+              <li>SQL</li>
+              <li>R</li>
+            </ul>With some understanding of the above technologies, you will be able to build a pretty nifty web app that allows you to visualize the real-time price of power in PJM.<p></p>
+            <hr>
+	    
+            <h3>R, R Studio, and Shiny</h3>
+            <p>Now that we have the data we want stored in our MySQL database, we will setup a Shiny server that will diplay this data in a graphical format. We will plot the time series of a given market based on user input. We can expose this applicaiton to the outside world, or just let it live in our own internal network. This section of the tutorial requies use of a more powerful computer than the RPi. The RPi is not powerful enough to run R or Shiny server, so I am going to use my Macbook Air and host the Shiny server on my local machine. You can also use a more powerful Linux box or even a Windows machine if you prefer.</p><br>
+	          <h4><strong>Installing MySQL on the RPi</strong></h4>
+            <p>Installing MySQL on the RPi is extremely simple. Before we go any further, it is a good idea to make sure everything is up-to-date by entering the following:</p>
+            <pre><code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code></pre>
+            <p>Next, install MySQL along with the Python connector which we will use later.</p>
+            <pre><code>sudo apt-get install mysql-server python-mysqldb</code></pre>
+            <p>During installation, you will be asked to enter a password for the <strong>root</strong> user.</p>
+            <p>After you have installed MySQL, fire it up on the RPi by entering the following:</p>
+	          <pre><code>mysql -u root -p</code></pre>
+	          <p>The <strong>-u</strong> argument specifies the <strong>user</strong> and the <strong>-p</strong> argument tells mysql to ask for a password. You will be greeted with the following screen:</p>
+            <pre><code>Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt;</code></pre><br>
+	    <h4><strong>Standing up the database and creating a user</strong></h4>
+            <p>Now let's create the database that will store all of our data:</p>
+            <pre><code>mysql&gt;CREATE DATABASE rtpjmprices
+    -&gt;	DEFAULT CHARACTER SET utf8
+    -&gt;	DEFAULT COLLATE utf8_general_ci;</code></pre>
+            <p>We want to create a user named <strong>parser</strong> which will connect to the <strong>rtpjmprices</strong> database and populate it with data.</p>
+            <pre><code>mysql&gt;CREATE USER 'parser'@'localhost';</code></pre>
+            <p>This user will have to have the correct permissions to write to the database.</p>
+	    <pre><code>mysql&gt;GRANT ALL PRIVILEGES ON rtpjmprices.*
+    -&gt;	TO 'parser'@'localhost';</code></pre><br>
+	    <h4><strong>Creating the tables</strong></h4>
+	    <p>Now we will create two tables, one to store the price data and one to store the descriptive market data (PJM is an ISO in which there are many different electricity markets). Let's call our data table pjmdatatable and our descriptive table pjmidtable.</p>
+	   <p>For our descriptive table, we are going to create two columns, a primary key column and a description column:</p>
+	   <pre><code>mysql&gt;CREATE TABLE `pjmidtable` (
+    -&gt;	`marketid` INT NOT NULL AUTO_INCREMENT,
+    -&gt;	`description` VARCHAR(10) NOT NULL ,
+    -&gt;	PRIMARY KEY (`marketid`) ) ENGINE=InnoDB;</code></pre>
+	   <p>For our price data table, we are going to need a few more columns. We need a primary key column, a marketed column (since we will be bringing in data from multiple markets), a price column, and a eventdatetime column:</p>
+	   <pre><code>mysql&gt;CREATE TABLE `pjmdatatable` (
+    -&gt;	`pjmdataid` INT NOT NULL AUTO_INCREMENT,
+    -&gt;	`marketid` VARCHAR(10) NOT NULL ,
+    -&gt;	`price` DECIMAL(6,2) NOT NULL ,
+    -&gt;  `datetime` DATETIME NOT NULL ,
+    -&gt;	PRIMARY KEY (`pjmdataid`) ) ENGINE=InnoDB;</code></pre>
+            <p>The last step in setting up our database it creating a relation between our tables by applying a foreign key constraint on <strong>pjmdatatable.marketid</strong>. To do this, execute the following in the MySQL console:</p>
+            <pre><code>mysql&gt;ALTER TABLE `pjmdatatable` 
+    -&gt;	ADD CONSTRAINT `marketid`
+    -&gt;	FOREIGN KEY (`marketid`)
+    -&gt;	REFERENCES `pjmidtable` (`marketid`)
+    -&gt;	ON DELETE CASCADE
+    -&gt;	ON UPDATE CASCADE
+    -&gt;	, ADD INDEX `marketid_idx` (`marketid` ASC);</code></pre>
+	    <p>We are now ready to write the script that will populate our database with data.</p>
+	    <hr><h3>The Parser</h3>
+            <p>We are going to write a parser in Python using the BeautifulSoup package. We are going to harvest our data from <a href="http://www.pjm.com/pub/account/lmpgen/lmppost.html">this website</a>. PJM updates the prices on this page every five minutes. For now, let's just focus on harvesting the "Zone" prices. Zones can be thought of as subsections of the greater PJM system.</p><br>
+	    <h4><strong>Installing Python and required packages</strong></h4>
+            <p>The first step is installing Python and required packages on the RPi. We are going to install <strong>python-dev</strong> since it also comes with <strong>vitualenv</strong> and <strong>pip</strong>, along with some other packages.:</p>
+	    <pre><code>apt-get install build-essential python-dev libmysqlclient-dev</code></pre>
+            <p>Now we are going to write the parser that will harvest the prices from <a href="http://www.pjm.com/pub/account/lmpgen/lmppost.html">here</a>. First, I suggest reading a a little bit about BeautifulSoup. The <a href="http://www.crummy.com/software/BeautifulSoup/bs4/doc/">documentation</a> is pretty fantastic.</p>
+
+	    <p>Let's install the packages that we will be using with <strong>pip</strong>:</p>
+
+	    <pre><code>pip install beautifulsoup4
+pip install numpy
+pip install MySQL-python
+</code></pre>
+
+	    <p>Now let's create a folder for our application:</p>
+	    <pre><code>mkdir app
+cd app</code></pre>
+
+<p>Now let's write the parser. Create a file called <strong>parser.py</strong></p>
+
+<ol>
+              <li>Vestibulum id ligula porta felis euismod semper.</li>
+              <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+              <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+            </ol>
+            <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+          </div><!-- /.blog-post -->
+
+<div class="blog-post">
+            <a name="20140529"><h3>Electricity Price Web App - Part 2</h3></a>
+            <p class="blog-post-meta">May 29, 2014 by <a href="http://mpburt.com/">michael</a></p>
+
+            <p>This is a series of posts describing how to build a web app that displays the price of electricity in <a href="http://www.pjm.com/">PJM Interconnection</a>. I am going to show you how to build this applicaiton on a <a href="http://www.raspberrypi.org/help/what-is-a-raspberry-pi/">Raspberry Pi</a>, but it will work on many different unix systems with some minor changes.</p>
+            <p>This series of posts is broken up into three parts:
+            </p><ul>
+              <li><a href="http://mpburt.com/blog/data/#20140424">Part 1 - The Database - stand up a database to store our data</a></li>
+              <li><a href="http://mpburt.com/blog/data/#20140529">Part 2 - The Parser - set up a web scraper to harvest the price data</a></li>
+              <li><a href="http://mpburt.com/blog/data/20140627">Part 3 - Visualization - visualize the data using R and Shiny</a></li>
+            </ul>
+      All of these posts assumes that you have rudimentary knowledge of a few things: 
+            <ul>
+              <li>Unix operating system</li>
+              <li>python</li>
+              <li>SQL</li>
+              <li>R</li>
+            </ul>With some understanding of the above technologies, you will be able to build a pretty nifty web app that allows you to visualize the real-time price of power in PJM.<p></p>
+            <hr>
+      <h3>Part 1 - The Database</h3>
+            <p>The first step to deploying this web app is setting up the database that will power the entire application. I have chosen MySQL because it is very user friendly, free, and powerful enough to meet our needs.</p><br>
+      <h4><strong>Installing MySQL on the RPi</strong></h4>
+            <p>Installing MySQL on the RPi is extremely simple. Before we go any further, it is a good idea to make sure everything is up-to-date by entering the following:</p>
+            <pre><code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code></pre>
+            <p>Next, install MySQL along with the Python connector which we will use later.</p>
+            <pre><code>sudo apt-get install mysql-server python-mysqldb</code></pre>
+            <p>During installation, you will be asked to enter a password for the <strong>root</strong> user.</p>
+            <p>After you have installed MySQL, fire it up on the RPi by entering the following:</p>
+      <pre><code>mysql -u root -p</code></pre>
+      <p>The <strong>-u</strong> argument specifies the <strong>user</strong> and the <strong>-p</strong> argument tells mysql to ask for a password. You will be greeted with the following screen:</p>
+            <pre><code>Copyright (c) 2000, 2013, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql&gt;</code></pre><br>
+      <h4><strong>Standing up the database and creating a user</strong></h4>
+            <p>Now let's create the database that will store all of our data:</p>
+            <pre><code>mysql&gt;CREATE DATABASE rtpjmprices
+    -&gt;  DEFAULT CHARACTER SET utf8
+    -&gt;  DEFAULT COLLATE utf8_general_ci;</code></pre>
+            <p>We want to create a user named <strong>parser</strong> which will connect to the <strong>rtpjmprices</strong> database and populate it with data.</p>
+            <pre><code>mysql&gt;CREATE USER 'parser'@'localhost';</code></pre>
+            <p>This user will have to have the correct permissions to write to the database.</p>
+      <pre><code>mysql&gt;GRANT ALL PRIVILEGES ON rtpjmprices.*
+    -&gt;  TO 'parser'@'localhost';</code></pre><br>
+      <h4><strong>Creating the tables</strong></h4>
+      <p>Now we will create two tables, one to store the price data and one to store the descriptive market data (PJM is an ISO in which there are many different electricity markets). Let's call our data table pjmdatatable and our descriptive table pjmidtable.</p>
+     <p>For our descriptive table, we are going to create two columns, a primary key column and a description column:</p>
+     <pre><code>mysql&gt;CREATE TABLE `pjmidtable` (
+    -&gt;  `marketid` INT NOT NULL AUTO_INCREMENT,
+    -&gt;  `description` VARCHAR(10) NOT NULL ,
+    -&gt;  PRIMARY KEY (`marketid`) ) ENGINE=InnoDB;</code></pre>
+     <p>For our price data table, we are going to need a few more columns. We need a primary key column, a marketed column (since we will be bringing in data from multiple markets), a price column, and a eventdatetime column:</p>
+     <pre><code>mysql&gt;CREATE TABLE `pjmdatatable` (
+    -&gt;  `pjmdataid` INT NOT NULL AUTO_INCREMENT,
+    -&gt;  `marketid` VARCHAR(10) NOT NULL ,
+    -&gt;  `price` DECIMAL(6,2) NOT NULL ,
+    -&gt;  `datetime` DATETIME NOT NULL ,
+    -&gt;  PRIMARY KEY (`pjmdataid`) ) ENGINE=InnoDB;</code></pre>
+            <p>The last step in setting up our database it creating a relation between our tables by applying a foreign key constraint on <strong>pjmdatatable.marketid</strong>. To do this, execute the following in the MySQL console:</p>
+            <pre><code>mysql&gt;ALTER TABLE `pjmdatatable` 
+    -&gt;  ADD CONSTRAINT `marketid`
+    -&gt;  FOREIGN KEY (`marketid`)
+    -&gt;  REFERENCES `pjmidtable` (`marketid`)
+    -&gt;  ON DELETE CASCADE
+    -&gt;  ON UPDATE CASCADE
+    -&gt;  , ADD INDEX `marketid_idx` (`marketid` ASC);</code></pre>
+      <p>We are now ready to write the script that will populate our database with data.</p>
+      <hr><h3>The Parser</h3>
+            <p>We are going to write a parser in Python using the BeautifulSoup package. We are going to harvest our data from <a href="http://www.pjm.com/pub/account/lmpgen/lmppost.html">this website</a>. PJM updates the prices on this page every five minutes. For now, let's just focus on harvesting the "Zone" prices. Zones can be thought of as subsections of the greater PJM system.</p><br>
+      <h4><strong>Installing Python and required packages</strong></h4>
+            <p>The first step is installing Python and required packages on the RPi. We are going to install <strong>python-dev</strong> since it also comes with <strong>vitualenv</strong> and <strong>pip</strong>, along with some other packages.:</p>
+      <pre><code>apt-get install build-essential python-dev libmysqlclient-dev</code></pre>
+            <p>Now we are going to write the parser that will harvest the prices from <a href="http://www.pjm.com/pub/account/lmpgen/lmppost.html">here</a>. First, I suggest reading a a little bit about BeautifulSoup. The <a href="http://www.crummy.com/software/BeautifulSoup/bs4/doc/">documentation</a> is pretty fantastic.</p>
+
+      <p>Let's install the packages that we will be using with <strong>pip</strong>:</p>
+
+      <pre><code>pip install beautifulsoup4
+pip install numpy
+pip install MySQL-python
+</code></pre>
+
+      <p>Now let's create a folder for our application:</p>
+      <pre><code>mkdir app
+cd app</code></pre>
+
+<p>Now let's write the parser. Create a file called <strong>parser.py</strong></p>
+
+<ol>
+              <li>Vestibulum id ligula porta felis euismod semper.</li>
+              <li>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
+              <li>Maecenas sed diam eget risus varius blandit sit amet non magna.</li>
+            </ol>
+            <p>Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.</p>
+          </div><!-- /.blog-post -->
+
+          <div class="blog-post">
+            <h2 class="blog-post-title">New feature</h2>
+            <p class="blog-post-meta">December 14, 2013 by <a href="http://mpburt.com/blog/data/#">Chris</a></p>
+
+            <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+            <ul>
+              <li>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.</li>
+              <li>Donec id elit non mi porta gravida at eget metus.</li>
+              <li>Nulla vitae elit libero, a pharetra augue.</li>
+            </ul>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+            <p>Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.</p>
+          </div><!-- /.blog-post -->
+
+          <ul class="pager">
+            <li><a href="http://mpburt.com/blog/data/#">Previous</a></li>
+            <li><a href="http://mpburt.com/blog/data/#">Next</a></li>
+          </ul>
+
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>This is my blog where I catalog projects that I work on in my free time. I am always open to suggestions on how to improve the projects I have written up. Feel free to drop me a line.</p>
+          </div>
+
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>Archives</h4>
+            <ol class="list-unstyled">
+
+              <li><a href="http://mpburt.com/blog/data/#20140424">Offshore Wind Production</a></li>
+              <li><a href="http://mpburt.com/blog/data/#20140424">Electricity Price Web App</a></li>
+              <li><a href="http://mpburt.com/blog/data/#20140424">Electricity Price Mobile App</a></li>
+              <li><a href="http://mpburt.com/blog/data/#20140424">Optimal Portfolio Calculator</a></li>
+              <li><a href="http://mpburt.com/blog/data/#20140424">MHA Bakken Oil Production</a></li>
+            </ol>
+          </div>
+
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="http://www.linkedin.com/pub/michael-burt/1a/b98/807">LinkedIn</a></li>
+              <li><a href="http://mpburt.com/blog/data/#">Facebook</a></li>
+              <li><a href="http://mpburt.com/blog/data/#">GitHub</a></li>
+            </ol>
+          </div>
+
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div class="blog-footer">
+      <p>
+        <a href="http://mpburt.com/blog/data/#">Back to top</a>
+      </p>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"></script>
+  
+</body></html>

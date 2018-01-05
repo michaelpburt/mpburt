@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="life">
+	<meta name="author" content="michael burt">
+
+	<link rel="shortcut icon" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+	<title>life</title>
+
+ 	<!-- Bootstrap core CSS -->
+  	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+	<link href="http://mpburt.com/css/style-blog.css" rel="stylesheet">
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+
+
+	<!--[if lt IE 9]>
+		<script src="../../assets/js/ie8-responsive-file-warning.js"></script>
+	<![endif]-->
+
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  	<!--[if lt IE 9]>
+	  	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	  	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  	<![endif]-->
+
+</head>
+
+<body>
+  	<div class='image_rainier'>
+  		<h3 class="blog-title" style="position:absolute;left:0px;bottom:160px;left:50%;width:940px;height:0;margin-left:-5px;vertical-align:middle;">
+			<font color="white"><strong>mount rainier</strong></font>
+		</h3>
+
+		<div class="blog-header">
+
+		  	<h1 style="position:absolute;left:0px;bottom:84px;left:50%;width:940px;height:0;margin-left:-5px;vertical-align:middle;">
+				<font color="white"><strong>Jacob R., Chris T., Chris R., & Michael B.</strong></font>
+			</h1>
+		</div>
+	  
+		<h1 style="position:absolute;left:0px;bottom:42px;left:50%;width:940px;height:0;margin-left:-5px;vertical-align:middle;">
+			<font color="white"><strong>August 15th, 2015</strong></font>
+		</h1>
+
+	</div>
+	
+	<div class="container" style="display:inline-block;position:absolute;top:110%;bottom:0;left:0;right:0;margin:auto;">
+		<div class="row">
+	 		<div class="col-lg-12">
+			
+				<hr>
+
+				<h1><strong>Climbing the Hill</strong></h1>
+				<h2>September 6th, 2015</h2>
+
+				<hr>
+				<br>
+				<br>
+
+			</div>
+			
+			<div id="map" style="width: 940px; height: 600px; margin: 15px;"></div>
+
+		  	<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+		  	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+		  	<script>
+
+		  		var map = L.map('map').setView([46.8353009487, -121.75872802734375], 12);
+
+				L.tileLayer('http://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWljaGFlbHBidXJ0IiwiYSI6ImNpZ2hnaGFiMDg2OXd0a20wMXMyZHRrM24ifQ.sBc3tBbrMQTPYsgpdtrJIw', {      
+				  	maxZoom: 18,
+				  	attribution: '<a href="https://www.mapbox.com/">MapBox</a>',
+				  	id: 'mapbox.streets'
+				}).addTo(map);
+
+
+				var runLayer = omnivore.kml('http://mpburt.com/geo/rainier.kml')
+					.on('ready', function() {
+					map.fitBounds(runLayer.getBounds());
+				})
+			  	.addTo(map);
+
+				var popup = L.popup();
+
+			</script>
+
+			<div class="col-sm-12 blog-main">
+
+			<br>
+
+			<p>We had been talking about Rainier for over a year. Jacob, Chris, and myself had been 
+			doing a lot of climbing in Colorado, and we wanted a chance to put our skills to the test. 
+			Also, it had been almost 10 years to the day since I was last on a glacier. We set our 
+			date well in advance, and trained like hell all summer long. It never really feels like 
+			training in Colorado, its always more of a weekend adventure. But training it was. We 
+			were well prepared physically. </p>
+
+			<br>
+
+			<p>We flew into Seattle on Wednesday evening and immediately hit the sack. Jacob's friend, 
+			Chris T., was joining us for the adventure and graciously hosted us at his house. Thursday 
+			was mainly a prep day where we packed up our gear, made a stop at REI (because, why not?), 
+			and stocked up on food and other supplies. We then drove up to the park and camped out at 
+			a campsite very close to Paradise. Our plan was to practice some rope work and get a good 
+			night's rest. We got about 40 minutes of rope work in and then called it a night.</p>
+
+			<br>
+
+			<p>We got up quite early and we were at the Paradise trailhead around 6:00AM. The weather 
+			was shit in the morning, typical Seattle fog. We hoped it would break but it steadily grew 
+			throughout the day. This made for some fun and interesting route finding on the way up to 
+			Camp Muir, but nothing too serious.</p>
+
+			<br>
+
+			<p></p>
+
+			<hr>
+			<br>
+
+		</div>
+
+	</div><!-- /.blog-main -->
+  </div><!-- /.row -->
+</div><!-- /.container -->
+
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<!-- saved from url=(0024)http://mpburt.com/about/ -->
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="about michael burt">
+    <meta name="author" content="michael burt">
+
+    <title>gallery</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <!-- Custom styles for this template -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://mpburt.com/js/bootstrap.lightbox.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="http://mpburt.com/css/style-blog.css" rel="stylesheet" type="text/css" />
+    <link href="http://mpburt.com/css/bootstrap.lightbox.css" rel="stylesheet" media="screen" type="text/css" />
+
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      <script>
+$(document).ready(function(){
+
+    loadGallery(true, 'a.thumbnail');
+
+    //This function disables buttons when needed
+    function disableButtons(counter_max, counter_current){
+        $('#show-previous-image, #show-next-image').show();
+        if(counter_max == counter_current){
+            $('#show-next-image').hide();
+        } else if (counter_current == 1){
+            $('#show-previous-image').hide();
+        }
+    }
+
+    function loadGallery(setIDs, setClickAttr){
+        var current_image,
+            selector,
+            counter = 0;
+
+        $('#show-next-image, #show-previous-image').click(function(){
+            if($(this).attr('id') == 'show-previous-image'){
+                current_image--;
+            } else {
+                current_image++;
+            }
+
+            selector = $('[data-image-id="' + current_image + '"]');
+            updateGallery(selector);
+        });
+
+        function updateGallery(selector) {
+            var $sel = selector;
+            current_image = $sel.data('image-id');
+            $('#image-gallery-caption').text($sel.data('caption'));
+            $('#image-gallery-title').text($sel.data('title'));
+            $('#image-gallery-image').attr('src', $sel.data('image'));
+            disableButtons(counter, $sel.data('image-id'));
+        }
+
+        if(setIDs == true){
+            $('[data-image-id]').each(function(){
+                counter++;
+                $(this).attr('data-image-id',counter);
+            });
+        }
+        $(setClickAttr).on('click',function(){
+            updateGallery($(this));
+        });
+    }
+});
+      </script>
+
+  </head>
+
+  <body>
+
+        <div class="blog-masthead">
+            <div class="container">
+                <nav class="blog-nav">
+                    <a class="blog-nav-item" href="http://mpburt.com/">Home</a> <a class="blog-nav-item" href="http://mpburt.com/about/">About</a> <a class="blog-nav-item" href="http://mpburt.com/blog/">Blog</a> <a class="blog-nav-item active" href="http://mpburt.com/life/">Life</a>
+                </nav>
+            </div>
+        </div>
+        <div class="container">
+            <div class="blog-header">
+                <h1 class="blog-title">
+                    colorado hikes
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Kit Carson &amp; Challenger Point (August 30th, 2014)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        Jacob, Chris and I planned a Labor Day backpacking trip down in the Sangre de Cristo Mountains. It was incredible. I got after the North Ridge.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="" data-toggle="modal" data-title="A beautiful sunset!" data-caption="Ran up the hill to grab this picture. The campsite looked west across the San Luis valley." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-30%2019.32.02.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-30%2019.32.02_4x3.jpg"></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="2" data-toggle="modal" data-title="Another sunset shot" data-caption="The clouds were so colorful." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-30 19.36.45.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-30%2019.36.45_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="3" data-toggle="modal" data-title="Willow Lake" data-caption="This is the lake above the campground. I took this shot about a mile up the trail." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-31 06.47.39.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-31%2006.47.39_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="4" data-toggle="modal" data-title="View from the top" data-caption="We had a beautiful day in the Sangres." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-31 09.51.48.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-31%2009.51.48_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="42" data-toggle="modal" data-title="The Crestones" data-caption="A view of the north aspect of Crestone Peak." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-31%2010.16.17.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-31%2010.16.17_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="43" data-toggle="modal" data-title="The Sand Dunes" data-caption="Nearby Sand Dunes National Park." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-31%2010.16.33.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-31%2010.16.33_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="44" data-toggle="modal" data-title="The North Ridge" data-caption="This is the route I climbed." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-31%2011.16.12.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-31%2011.16.12_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="45" data-toggle="modal" data-title="The Sangres" data-caption="A beautiful shot of the Sangre de Cristo range from the west." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-31%2017.35.34.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-31%2017.35.34_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Mount of the Holy Cross (August 24th, 2014)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        My roommates had climbed Mount of the Holy Cross earlier in the summer, and I didn't want to be left behind! I spent the night in the Notch Mountain shelter at 13,200 ft. I wasn't alone though, a pika nibbled on my hat while I was snoozing.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="1" data-toggle="modal" data-title="Trailhead" data-caption="Looking back at route 24 and the trailhead." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-23%2018.30.17-1.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-23%2018.30.17-1_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="12" data-toggle="modal" data-title="Notch Mountain Shelter" data-caption="An alpine shelter at 13,000ft." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-23%2019.39.50.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-23%2019.39.50_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="22" data-toggle="modal" data-title="The Summit" data-caption="Looking up towards the summit block." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-24%2010.27.37.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-24%2010.27.37_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="32" data-toggle="modal" data-title="Halfmoon" data-caption="A view of the summit from Halfmoon Pass." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-24%2013.34.51.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-24%2013.34.51_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-image-id="23" data-toggle="modal" data-title="Pika Lunch" data-caption="No comment." data-image="http://mpburt.com/img/co_mountains/orig/2014-08-24%2015.38.59.jpg" data-target="#image-gallery"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-24%2015.38.59_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Long's Peak (August 16th, 2014)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        After visiting a friend in NH (and climbing Mt. Washington!), I came back to CO visited Long's Peak. My friend Jake flew out from VA to join in the fun. The group was Jake, Jacob, Chris, and Alex. We climbed the Key Hole Route and rappelled down the Cables Route. It was a great time.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_053230_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_061638_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_065929_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_074805_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_090821_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_095336-1_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_101837_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_102017_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_103139_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_103634_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-16_114516_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-18_175701_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/fb_longs_1_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/fb_longs_2_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/fb_longs_3_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/fb_longs_4_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Democrat, Cameron, Lincoln, &amp; Bross (August 3rd, 2014)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        I took a week off to go on a family vacation on the East coast, but I was back for more the following weekend. My friend Jacob joined me for the DeCaLiBron.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_065323_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_065346_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_065410_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_074058_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_074129_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_074206_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_080456_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-08-03_093106_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Greys Peak and Torreys Peak (July 19th, 2014)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        I had the 14er bug at this point. I headed up to the mountains on Friday night with the plan of hiking Greys and Torreys by myself the following morning. And I did just that.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-19_084213_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-19_084254_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-20_094703_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-20_094708_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Quandary Peak (July 12th, 2014)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        Convinced some friends to go on a moonlight hike up Quandary and watch the sunrise from the top. Dante made friends.
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-12_063012_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-12_063716_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Wilson Peak (July 4th, 2014)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        I took a long hiatus from the mountains but finally got back with an Independence Day hike on Wilson Peak. It was my first taste of the San Juans. Telluride was beautiful!
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-04_065855_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-04_084607_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-04_093807_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-04_100333_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-04_101739_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-04_103838_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-04_121240_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2014-07-05_191737_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Mt. Evans and Mt. Bierstadt (Aug. 17th, 2013)
+                    </h1>
+                </div>
+                <div class="col-sm-12 blog-main">
+                    <p>
+                        These were my very first fourteeners. My roommates dragged me up them exactrly 2 weeks after I moved to the beautiful state of Colorado!
+                    </p>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2013-08-17_085514_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2013-08-17_085539_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2013-08-17_085613_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2013-08-17_085650_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2013-08-17_105941_4x3.jpg" alt=""></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#" data-toggle="lightbox"><img class="img-responsive" src="http://mpburt.com/img/co_mountains/2013-08-17_153521_4x3.jpg" alt=""></a>
+                </div>
+            </div><!-- /.blog-main -->
+        </div><!-- /.row -->
+        <!-- /.container -->
+        <div class="blog-footer">
+            <p>
+                <a href="http://mpburt.com/blog/data/#">Back to top</a>
+            </p>
+        </div>
+        <div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="image-gallery-title"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <img id="image-gallery-image" class="img-responsive" src="">
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-primary" id="show-previous-image">Previous</button>
+                        </div>
+                        <div class="col-md-8 text-justify" id="image-gallery-caption">
+                            This text will be overwritten by jQuery
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" id="show-next-image" class="btn btn-default">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+</body></html>

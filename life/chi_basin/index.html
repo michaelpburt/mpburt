@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="life">
+	<meta name="author" content="michael burt">
+
+	<link rel="shortcut icon" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+  	<title>life</title>
+
+	<!-- Bootstrap core CSS -->
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+
+  	<!-- Custom styles for this template -->
+  	<link href="http://mpburt.com/css/style-blog.css" rel="stylesheet">
+  	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+
+
+  	<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+  	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	  	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	  	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+</head>
+
+<body>
+
+  	<div class='image_chi'>
+  		<h3 class="blog-title" style="position:absolute;left:0px;bottom:160px;left:50%;width:940px;height:0;margin-left:-5px;vertical-align:middle;">
+			<font color="white"><strong>chicago basin</strong></font>
+		</h3>
+		
+		<div class="blog-header">
+			<h1 style="position:absolute;left: 0px; bottom: 84px;left: 50%;width: 940px;height: 0;margin-left: -5px;vertical-align: middle;">
+				<font color="white"><strong>Dad & Me</strong></font>
+			</h1>
+		</div>
+
+		<h1 style="position:absolute;left:0px;bottom:42px;left: 50%;width:940px;height:0;margin-left:-5px;vertical-align middle;">
+			<font color="white"><strong>September 4th, 2015</strong></font>
+		</h1>
+	</div>
+
+	<div class="container" style="display:inline-block;position:absolute;top:110%;bottom:0;left:0;right:0;margin:auto;">
+		<div class="row">
+			<div class="col-lg-12">
+				
+				<hr>
+
+				<h1><strong>Day 1 - The Approach</strong></h1>
+				<h2>September 4th, 2015</h2>
+
+				<hr>
+		  		<br>
+		  		<br>
+
+		  	</div>
+
+			<div id="map" style="width: 940px; height: 600px; margin: 15px;"></div>
+
+			<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+			<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+			<script>
+
+  				var map = L.map('map').setView([37.624451, -107.640371], 13);
+
+				L.tileLayer('http://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWljaGFlbHBidXJ0IiwiYSI6ImNpZ2hnaGFiMDg2OXd0a20wMXMyZHRrM24ifQ.sBc3tBbrMQTPYsgpdtrJIw', {      
+					maxZoom: 18,
+					attribution: '<a href="https://www.mapbox.com/">MapBox</a>',
+					id: 'mapbox.streets'
+				}).addTo(map);
+
+
+			 	var runLayer = omnivore.kml('http://mpburt.com/geo/chi_out.kml')
+			  		.on('ready', function() {
+				 		map.fitBounds(runLayer.getBounds());
+			  		})
+			  	.addTo(map);
+
+				var popup = L.popup();
+			</script>
+
+		  	<div class="col-sm-12 blog-main">
+
+			  	<br>
+
+				<p>Dad arrived around 8:00 PM on Wednesday night. The plan was to travel down to 
+				Silverton, take the 
+				<a href="https://en.wikipedia.org/wiki/Durango_and_Silverton_Narrow_Gauge_Railroad">
+				Silverton-Durango Narrow Gauge Railway</a> to the Needleton stop, and then get off and 
+				hike up Chicago Basin.</p>
+
+				<br>
+
+				<p>Luckily the spirit that has cursed most of my dad's airport travel was not conjured 
+				and he had a safe and on time flight. We went to bed immediately because we had a long, 
+				long day in front of us. We got on the road by about 3:00 AM the following morning and 
+				had a pretty nice ride down to Gunnison where we had some breakfast at the W Cafe (which 
+				has an <a href="https://www.google.com/maps/contrib/102185549377772517553/@38.5448119,-106.9266549,3a,75y/data=!3m7!1e2!3m5!1s-HFrOUwx_f54%2FVNnEapPcmpI%2FAAAAAAAAAAU%2FdjNoEpOezLM!2e4!6s%2F%2Flh6.googleusercontent.com%2F-HFrOUwx_f54%2FVNnEapPcmpI%2FAAAAAAAAAAU%2FdjNoEpOezLM%2Fw203-h100-k-no%2F!7i640!8i480!6m1!1e1">awesome sign</a>).</p>
+
+				<br>
+
+				<p>The weather was looking a bit iffy at this point, but we had little choice but to 
+				continue. My dad and I both love four wheeling, so I decided that we would take the 
+				Alpine Loop in order to get to Silverton. This involved going over a 13,000ft pass on a 
+				difficult shelf road. The weather was pretty crappy on the pass, making the driving a 
+				little dangerous and stressful, but the scenerey made up for it. Despite a few tense 
+				moments on the road, we were able to see many old mine ruins and a herd of elk way up 
+				in the mountains.</p>
+
+				<br>
+
+				<p>Once we dropped over Engineer Pass, we came down into Animas Forks, a ghost town about 
+				15-20 miles from Silverton. We walked around the ruins and took a few picures. Despite a 
+				huge number of buildings, roads, and mines, the area was only populated between 1880 and 
+				1920. It is pretty amazing to see the negative impacts on the land caused by less than 50 
+				years of mining activity.</p>
+
+				<br>
+
+				<p>After Animas Forks, we drove down into Silverton. We grabbed a few last-minute supplies 
+				from a gear shop in town, checked out a local store or too, and headed for the railroad. 
+				The train loads on a side street right in downtown Silverton. I was really surprised how 
+				"well seasoned" the train seemed. They are not kidding when they say it has been in 
+				continual operation since 1882. The train ride took around 1 hour in which time we took 
+				in the sights and contemplated our next few days in the back country. We folowed the 
+				Animas river to Needleton stop and jumped off. There really isn't much in Needleton 
+				besides a few old cabins and a water tank for filling up the locomotives as they climb 
+				the hill to Silverton from Durango.</p>
+
+				<br>
+
+				<p>Our goal was to get to the first area with acceptable campsites and shack up for 
+				the night. This ended up being a few miles in. the campsite we found for our first 
+				night was really stellar. We made some dinner and hit the hay after a long day 
+				traveling about 350 miles from Denver. As soon as we settled into bed, the skies 
+				opened as we drifted off to the sound of rain dancing on our tent.</p>
+
+				<hr>
+				<br>
+
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3441_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+				<a href="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" class="thumbnail" data-toggle="lightbox">
+					<img src="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3448_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3454_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3458_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3463_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3464_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3465_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3470_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3474_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3475_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3481_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3482_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-12">
+				<br>
+				<hr>
+
+				<h1><strong>Day 2 - Base Camp</strong></h1>
+				<h2>September 5th, 2015</h2>
+
+				<hr>
+		  		<br>
+		  		<br>
+
+		  	</div>
+
+			<div id="map-2" style="width: 940px; height: 600px; margin: 15px;"></div>
+			<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+			<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+
+			<script>
+
+  				var map = L.map('map-2').setView([37.624451, -107.640371], 13);
+
+				L.tileLayer('http://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWljaGFlbHBidXJ0IiwiYSI6ImNpZ2hnaGFiMDg2OXd0a20wMXMyZHRrM24ifQ.sBc3tBbrMQTPYsgpdtrJIw', {      
+					maxZoom: 18,
+					attribution: '<a href="https://www.mapbox.com/">MapBox</a>',
+					id: 'mapbox.streets'
+				}).addTo(map);
+
+			  	var runLayer = omnivore.kml('http://mpburt.com/geo/chi_out.kml')
+			  	.on('ready', function() {
+				  	map.fitBounds(runLayer.getBounds());
+			  	})
+			  	.addTo(map);
+
+
+  				var popup = L.popup();
+
+  				map.on('click', onMapClick);
+
+			</script>
+
+		  	<div class="col-sm-12 blog-main">
+
+			  	<br>
+
+				<p>We woke up to more rain. It had rained just about the entire night, and it was still 
+				going. We waited it out until around 10:30 AM at which point we got a small window to 
+				pack up our stuff. Surprisingly, given the amount of rain that had fallen, all of our 
+				stuff was dry. I have a pretty beefy Mountain Hardware Trango 2 and we had a very pleasant 
+				and dry night inside the spacious tent.</p>
+
+				<br>
+
+				<p>We ate some awesome breakfast sandwiches with eggs and bacon. It doesn't get much 
+				better than that on a backpacking trip. That is officially my favorite backcountry 
+				breakfast. The weather improved slightly for our hike to the upper basin. Our plan was to 
+				get as close as we could to the trail leading up into Twin Lakes. There is a camping line 
+				around 10,200ft, so there was no way we could get higher than that. We wanted to take it 
+				easy and set up a nice camp and try and be rested for our summit day.</p>
+
+				<br>
+
+				<p>We had a liesurely hike up into Chicago Basin, which was lush and beautiful. We saw a 
+				lot of wild flowers and the flora was thick. We had a ton of rain this year in Colorado 
+				which I think contributed to how lush it was. We got up to our camp around 3:00PM and 
+				set up the tent immediately. Shortly afterwards it started drizzling again... we just 
+				weren't going to escape this weather. Our campsite was a little off the beaten path. 
+				There were some crowds up in the basin (understandable since it was Labor Day weekend) 
+				but we were able to avoid them by being deliberate in our campsite selection.</p>
+
+				<br>
+
+				<p>After eating a bit of food and doing a little exploring, we went to bed. We were both 
+				pretty tired and we had a huge day in front of us tomorrow. We still had almost 4,000ft 
+				just to get on top of any mountain. I wanted to bag all four of the 14ers in the basin, 
+				which meant that I was looking at almost 7,000ft the following day. The weather was 
+				improving and we fell asleep under a cloudy sky interupted occasionaly by the stars.</p>
+
+				<hr>
+				<br>
+
+			</div>
+		
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3441_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+				<a href="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" class="thumbnail" data-toggle="lightbox">
+					<img src="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3448_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3454_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3458_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3463_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3464_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3465_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3470_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3474_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3475_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3481_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3482_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+		  	<div class="col-lg-12">
+				<br>
+				<hr>
+
+				<h1><strong>Day 3 - Summit Push</strong></h1>
+				<h2>September 6th, 2015</h2>
+
+				<hr>
+		  		<br>
+		  		<br>
+
+		  	</div>
+
+			<div id="map-3" style="width: 940px; height: 600px; margin: 15px;"></div>
+			<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+			<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+			<script>
+
+  				var map = L.map('map-3').setView([37.624451, -107.640371], 13);
+
+				L.tileLayer('http://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWljaGFlbHBidXJ0IiwiYSI6ImNpZ2hnaGFiMDg2OXd0a20wMXMyZHRrM24ifQ.sBc3tBbrMQTPYsgpdtrJIw', {      
+					maxZoom: 18,
+					attribution: '<a href="https://www.mapbox.com/">MapBox</a>',
+					id: 'mapbox.streets'
+				}).addTo(map);
+
+
+				var runLayer = omnivore.kml('http://mpburt.com/geo/chi_out.kml')
+					.on('ready', function() {
+					map.fitBounds(runLayer.getBounds());
+				})
+				.addTo(map);
+
+			  	var popup = L.popup();
+
+  				map.on('click', onMapClick);
+
+			</script>
+
+		  	<div class="col-sm-12 blog-main">
+
+			  	<br>
+
+				<p>Our intention was to get out of bed around 4:00 AM and get on the trail. Well we woke 
+				up to some freezing temps, but at least there were stars in the sky. I saw a few headlamps 
+				way up near Twin Lakes, but I suggested that we go back bed for another 1.5 hours in order 
+				to let the sun come up and warm the temps a bit. I really did not want to be up on the 
+				mountain with ice and I knew that a few rays would be all that was needed to melt off the 
+				verglass.</p>
+
+				<br>
+
+				<p>We popped out of bed around 5:30 AM and got on the trail. The plan was for both of us 
+				to hit the trail at the same time but I would power ahead of Dad and bag Eolus and North 
+				Eolus by myself. I took off like a bat out of hell with the intent of climbing about 
+				4,500ft in the time it took dad to do 2,000ft and we would rendevoux at Twin Lakes. Eolus 
+				was a lot more challenging than I thought it would be, especially the route finding, but 
+				alas, I got them both. Due to this, it took me a lot longer than I anticipated to get 
+				back to our rendevoux point. We were planning on meeting around 8:30 AM, but it was closer 
+				to 10:00 AM when we met back up.</p>
+
+				<br>
+
+				<p>At this point, we hiked up into the upper basin which held both Sunlight Peak and 
+				Windom Peak. Sunlight peak is considered one of the most difficult 14ers due to its 
+				extremely exposed upper reaches. I would go bag Sunlight while Dad made his way up Windom 
+				and then I would race up and meet him on Windom - that was the plan at least. I found 
+				Sunlight to be a lot easier than its reputation led me to believe, but I think this is 
+				because I do a lot of technical rock climbing and I wasn't really fazed by the exposure. 
+				Honestly, I found the most difficult part of Sunlight was the chossy nature of the rock. 
+				The route finding was way easier than Eolus and it was actually a pretty fun climb. 
+				Windom and Sunlight are right next to each other so Dad and I were able to stay in visual 
+				contact for most of the morning which was nice.<p>
+
+				<br>
+
+				<p>After blazing up Sunlight, I came down and around the basin and met Dad at about 
+				13,400ft up Windom. We hiked together for about 15 minutes but it looked like weather 
+				moving in was a distinct possibility. We were not in a bad spot, but there were 
+				definitely thunder clouds forming up near Uncompahgre and we did not want to get stuck 
+				in them. For this reason, I decided to race up Windom and come back down to Dad and 
+				assess the situation. It took me about 40 minutes to get the summit and return. At this 
+				point, the weather had improved and Dad had made his way up to about 13,700ft. The two 
+				of us set off for the summit, trying to find an easier path than the one I had just 
+				done an hour earlier. We made it to about 14,000ft before the exposure got the best of 
+				Dad. The route finding on Windom was not easy! There were several sections of class 3 
+				that Dad powered through, but the day was getting late and we decided to head back down. 
+				We did make it above 14,000ft on some serious class 3 though - not bad for a 59 year 
+				old from the flatlands! Awesome job Dad! Next time I promise to take you on an easier 
+				mountain :)</p>
+
+				<br>
+
+				<p>We made it back to camp and packed up our stuff under some much needed sunshine. We 
+				got back on the trail with the intentiion of getting as close to the rail road as we 
+				really could. We ended up dropping about 1,600ft and setup camp around 3 miles form the 
+				trail head on an old rail grade. We had a gorgeous campsite and beatuiful weather for a 
+				very pleasant evening. We polished off the rest of our beer and had a lovely evening 
+				under the stars. It was a new moon and the stars were some of the best that I have ever 
+				witnessed.</p>
+
+				<br>
+
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3441_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a href="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" class="thumbnail" data-toggle="lightbox">
+				<img src="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			 	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3448_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3454_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3458_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3463_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3464_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3465_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3470_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3474_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3475_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3481_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3482_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+		  	<div class="col-lg-12">
+		
+				<br>
+				<hr>
+
+				<h1><strong>Day 4 - Outbound</strong></h1>
+				<h2>September 7th, 2015</h2>
+
+				<hr>
+				<br>
+				<br>
+
+			</div>
+			
+			<div id="map-4" style="width: 940px; height: 600px; margin: 15px;"></div>
+			<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+			<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+			<script>
+
+  				var map = L.map('map-4').setView([37.624451, -107.640371], 13);
+
+				L.tileLayer('http://api.tiles.mapbox.com/v4/mapbox.run-bike-hike/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWljaGFlbHBidXJ0IiwiYSI6ImNpZ2hnaGFiMDg2OXd0a20wMXMyZHRrM24ifQ.sBc3tBbrMQTPYsgpdtrJIw', {      
+					maxZoom: 18,
+					attribution: '<a href="https://www.mapbox.com/">MapBox</a>',
+					id: 'mapbox.streets'
+				}).addTo(map);
+
+
+			  	var runLayer = omnivore.kml('http://mpburt.com/geo/chi_out.kml')
+			  		.on('ready', function() {
+					map.fitBounds(runLayer.getBounds());
+			  	})
+			  	.addTo(map);
+
+			  	map.on('click', onMapClick);
+
+			</script>
+
+		  	<div class="col-sm-12 blog-main">
+		  	
+			  	<br>
+
+				<p>Dad insisted that we break camp at the crack of dawn so we didn't miss our train. I 
+				wasn't so worried about it, so I made some coffee and breakfast and then sent Dad down 
+				the trail while I took my time breaking camp and packing up. I let him get about an hour 
+				start on me and then got on the trail.</p>
+
+				<br>
+
+				<p>We met up around 1 mile from the trail head and at this point we both knew that we 
+				could take our time and relax. We really enjoyed the mellow hike out and I even spotted 
+				an Uncompahgre butterfly! We reach the train tracks with a good hour to kill. As soon as 
+				our packs were off and we had changed in to some comfy clothing, I retireved our cache 
+				of beers from the Animas River, Pug Ryan Dunkle. Those beers were well-deserved, and 
+				well-envied by every other person (about 40) waiting with us at Needleton! We snapped 
+				some great pictures of the train tracks and soaked up some sun as we waited for the 
+				trian.</p>
+
+				<br>
+
+				<p>The train picked us up right on time. We both got a beer on the train and enjoyed the 
+				outdoor gondola as we made our way up the grade to Silverton. There is some gnarly rock 
+				climbing in this canyon, so I think a return trip is in my future. e made it back to 
+				Silverton by noon and immediately departed for Ouray where we planned on grabbing lunch. 
+				The Million Dollar Highway took our breathe away as we made our way through the San 
+				Juans. We pulled into the lovely town of Ouray where we grabbed a quick lunch and hopped 
+				back in the car for the long drive home.</p>
+
+				<br>
+
+				<p>We had originally planned to take the southern leg of the Alpine Loop back to Lake 
+				City and then on to Gunnison and Denver, but given our harrowing experience on the first 
+				leg, we bailed. I think we were both a little disappointed by this, so I suggested we 
+				take a backroad to Gunnison from Ridgeway. We ended up going over Owl Creek Pass in the 
+				San Juans. We got on Rt. 8 in Ridgeway and drove it ove rthe pass and down to Silver Jack 
+				Reservoir. There is a northern trailhead to Wetterhorn and Uncompaghre off of this road, 
+				but I think it involves a lot of bushwacking... fun! The coolest part of this drive was 
+				the close up shots we got of Courthouse Mountain. There are some incredible mountains right 
+				in this area, including Turrent Ridge and Cimaroron Ridge South. The drive back also 
+				included a biblical Labor Day traffic jam on 285. Dad really couldn't believe just how bad 
+				it could be. Welcome to CO! In the end, we had an awesome trip and saw some incredible places 
+				in Colorado. I fell more in love with the San Juans, and I will have to return soon.</p>
+
+				<br>
+
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3441_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a href="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" class="thumbnail" data-toggle="lightbox">
+					<img src="http://mpburt.com/img/chi_basin/IMG_3445_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3448_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3454_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3458_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3463_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3464_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3465_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3467_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3470_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  <a class="thumbnail" href="#" data-toggle="lightbox">
+				<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3474_4x3.JPG" alt="">
+			  </a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3475_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			 	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3481_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+			<div class="col-lg-3 col-md-4 col-xs-6 thumb">
+			  	<a class="thumbnail" href="#" data-toggle="lightbox">
+					<img class="img-responsive" src="http://mpburt.com/img/chi_basin/IMG_3482_4x3.JPG" alt="">
+			  	</a>
+			</div>
+
+		</div><!-- /.blog-main -->
+	</div><!-- /.row -->
+</div><!-- /.container -->
+
+</body>
+</html>
